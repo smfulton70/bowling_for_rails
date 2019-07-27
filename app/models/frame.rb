@@ -5,6 +5,7 @@ class Frame < ApplicationRecord
   before_create do
     self.strike = true if ball_one == 10
     self.spare = true if ball_one != 10 && get_frame_pin_total == 10
+    self.frame_number = self.game.frames.length + 1
     self.frame_score = get_frame_pin_total
   end
 
