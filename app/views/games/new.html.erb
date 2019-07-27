@@ -1,0 +1,29 @@
+<h1>Start a Game</h1>
+
+Please enter your name below.
+
+<%= form_with scope: :game, url: games_path, local: true do |form| %>
+<% if @game.errors.any? %>
+  <div>
+    <h2>
+      <%= pluralize(@game.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

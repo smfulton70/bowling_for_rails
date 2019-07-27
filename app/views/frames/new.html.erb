@@ -1,0 +1,24 @@
+<h1>Ready....Set....Bowl</h1>
+
+<%= form_with scope: :frame, url: game_frames_path, local: true do |form| %>
+  <p>
+    <%= form.label :ball_one %><br>
+    <%= form.number_field :ball_one %>
+  </p>
+
+  <p>
+    <%= form.label :ball_two %><br>
+    <%= form.number_field :ball_two %>
+  </p>
+
+  <p>
+    <%= form.label :ball_three %><br>
+    <%= form.number_field :ball_three %>
+  </p>
+
+  <%= form.hidden_field :frame_number %>
+
+  <p>
+    <%= form.submit value = "Bowl!"%>
+  </p>
+<% end %>

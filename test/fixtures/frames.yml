@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ball_1: 1
+  ball_2: 1
+  ball_3: 1
+  game: one
+
+two:
+  ball_1: 1
+  ball_2: 1
+  ball_3: 1
+  game: two
