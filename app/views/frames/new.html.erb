@@ -11,10 +11,14 @@
     <%= form.number_field :ball_two %>
   </p>
 
-  <p>
-    <%= form.label :ball_three %><br>
-    <%= form.number_field :ball_three %>
-  </p>
+
+    <% if @game.frames.length == 9 %>
+      <p>
+        <%= form.label :ball_three %><br>
+        <%= form.number_field :ball_three %>
+      </p>
+    <% end %>
+
 
   <%= form.hidden_field :frame_number %>
 

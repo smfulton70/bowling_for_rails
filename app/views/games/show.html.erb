@@ -1,6 +1,13 @@
-<h1>This is the game</h1>
+<h1>This is the game show page.</h1>
+
+<% if @game.frames.length == 10 %>
+  Thanks for playing. Your score is <%= @game.final_score %>.
+<% else %>
+
 
 Welcome to your game, <%= @game.name %>
 
 
 Click <%= link_to "here", new_game_frame_path(@game) %> to bowl.
+
+<% end %>

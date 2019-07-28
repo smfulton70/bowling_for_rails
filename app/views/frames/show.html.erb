@@ -8,5 +8,8 @@ Frame Score: <%= @frame.frame_score %><br />
 Strike: <%= @frame.strike %><br />
 Spare: <%= @frame.spare %><br /><br />
 
-
-<%= link_to "Bowl again", new_game_frame_path %>
+<% if @frame.frame_number == 10 %>
+  <%= link_to "See game results", game_path(params[:game_id]) %>
+<% else %>
+  <%= link_to "Bowl again", new_game_frame_path %>
+<% end %>
