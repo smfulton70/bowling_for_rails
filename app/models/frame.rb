@@ -1,12 +1,23 @@
 class Frame < ApplicationRecord
   belongs_to :game
-  validates :ball_one, :ball_two, :ball_three, presence: true
+  validates :ball_one, :ball_two, presence: true
 
   before_create do
+    if self.game
+      if self.game.frames.length == 2
+        @previous_frame = self.game.frames[-1]
+        p "This is last frame: #{@previous_frame}"
+      elsif self.game.frames.length > 2
+        @previous_previous_frame = self.game.frames[-2]
+        @previous_frame = self.game.frames[-1]
+        p "This is two frames ago: #{@previous_previous_frame}"
+        p "This is last frame: #{@previous_frame}"
+      end
+    end
     self.strike = true if ball_one == 10
     self.spare = true if ball_one != 10 && get_frame_pin_total == 10
     self.frame_number = self.game.frames.length + 1
-    self.frame_score = get_frame_pin_total
+    self.frame_score = (@previous_frame ? @previous_frame.frame_score : 0) + get_frame_pin_total
   end
 
   def bowl
@@ -45,7 +56,7 @@ class Frame < ApplicationRecord
   end
 
   def get_frame_pin_total
-    ball_one + ball_two + ball_three
+    ball_one + ball_two + (ball_three ? ball_three : 0)
   end
 
   def set_frame_score
