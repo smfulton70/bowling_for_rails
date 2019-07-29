@@ -20440,3 +20440,195 @@ Processing by GamesController#new as HTML
 Completed 200 OK in 29ms (Views: 22.3ms | ActiveRecord: 0.0ms)
 
 
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /Users/scottfulton/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/games" for ::1 at 2019-07-29 14:15:32 -0700
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/scottfulton/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by GamesController#index as HTML
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games"[0m
+  ↳ app/views/games/index.html.erb:1
+  Rendered games/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 267ms (Views: 255.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/games/new" for ::1 at 2019-07-29 14:15:37 -0700
+Processing by GamesController#new as HTML
+  Rendering games/new.html.erb within layouts/application
+  Rendered games/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 42ms (Views: 35.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/games" for ::1 at 2019-07-29 14:15:42 -0700
+Processing by GamesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7pmR+4DGeQ1gH4r0ms+8xDaHpNzKTccEag6i5BLHt8Ug4M0POmDP3JoxaBTcaEUSh5gBnnQxrTIHuqk9t1wWOg==", "game"=>{"name"=>"Scott"}, "commit"=>"Save Game"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/games_controller.rb:14
+  [1m[36mGame Create (0.4ms)[0m  [1m[32mINSERT INTO "games" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Scott"], ["created_at", "2019-07-29 21:15:42.863505"], ["updated_at", "2019-07-29 21:15:42.863505"]]
+  ↳ app/controllers/games_controller.rb:14
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/games_controller.rb:14
+Redirected to http://localhost:3000/games/2
+Completed 302 Found in 7ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/games/2" for ::1 at 2019-07-29 14:15:42 -0700
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:22
+  Rendering games/show.html.erb within layouts/application
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/views/games/show.html.erb:3
+  Rendered games/show.html.erb within layouts/application (13.2ms)
+Completed 200 OK in 35ms (Views: 30.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/games/2/frames/new" for ::1 at 2019-07-29 14:15:44 -0700
+Processing by FramesController#new as HTML
+  Parameters: {"game_id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:3
+  Rendering frames/new.html.erb within layouts/application
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/views/frames/new.html.erb:3
+  Rendered frames/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 28ms (Views: 17.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/games/2/frames" for ::1 at 2019-07-29 14:15:50 -0700
+Processing by FramesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kk6zCrOaKWa96U6U7KXCGqsPfdrnU0qikFA49Ulk0ExcN+/+CTyft0fHrHSqAjvMGhDYmFkvIJT95DMs7P9xsw==", "frame"=>{"ball_one"=>"1", "ball_two"=>"2", "frame_number"=>"0"}, "commit"=>"Bowl!", "game_id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[36mFrame Load (0.2ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/models/frame.rb:7
+  [1m[36mFrame Create (0.9ms)[0m  [1m[32mINSERT INTO "frames" ("ball_one", "ball_two", "frame_number", "frame_score", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["ball_one", 1], ["ball_two", 2], ["frame_number", 1], ["frame_score", 3], ["game_id", 2], ["created_at", "2019-07-29 21:15:50.910264"], ["updated_at", "2019-07-29 21:15:50.910264"]]
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+Redirected to http://localhost:3000/games/2/frames/11
+Completed 302 Found in 15ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/games/2/frames/11" for ::1 at 2019-07-29 14:15:50 -0700
+Processing by FramesController#show as HTML
+  Parameters: {"game_id"=>"2", "id"=>"11"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:15
+  [1m[36mFrame Load (0.3ms)[0m  [1m[34mSELECT  "frames".* FROM "frames" WHERE "frames"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:16
+  Rendering frames/show.html.erb within layouts/application
+  Rendered frames/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 28ms (Views: 23.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/games/2/frames/new" for ::1 at 2019-07-29 14:15:56 -0700
+Processing by FramesController#new as HTML
+  Parameters: {"game_id"=>"2"}
+  [1m[36mGame Load (0.7ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:3
+  Rendering frames/new.html.erb within layouts/application
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/views/frames/new.html.erb:3
+  Rendered frames/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 23ms (Views: 19.8ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/games/2/frames" for ::1 at 2019-07-29 14:16:03 -0700
+Processing by FramesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FLY5w/Jy1Wk7u5EbCI0/6oKUzJfJMtdyROnqYQ7Khyvaz2U3SNRjuMGVc/tOKsY8M4tp1XdOvUQpXeG4q1Em1A==", "frame"=>{"ball_one"=>"3", "ball_two"=>"4", "frame_number"=>"0"}, "commit"=>"Bowl!", "game_id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/models/frame.rb:7
+  [1m[36mFrame Create (0.7ms)[0m  [1m[32mINSERT INTO "frames" ("ball_one", "ball_two", "frame_number", "frame_score", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["ball_one", 3], ["ball_two", 4], ["frame_number", 2], ["frame_score", 7], ["game_id", 2], ["created_at", "2019-07-29 21:16:03.177543"], ["updated_at", "2019-07-29 21:16:03.177543"]]
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+Redirected to http://localhost:3000/games/2/frames/12
+Completed 302 Found in 8ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/games/2/frames/12" for ::1 at 2019-07-29 14:16:03 -0700
+Processing by FramesController#show as HTML
+  Parameters: {"game_id"=>"2", "id"=>"12"}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:15
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT  "frames".* FROM "frames" WHERE "frames"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:16
+  Rendering frames/show.html.erb within layouts/application
+  Rendered frames/show.html.erb within layouts/application (23.4ms)
+Completed 200 OK in 41ms (Views: 38.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/games/2/frames/new" for ::1 at 2019-07-29 14:16:06 -0700
+Processing by FramesController#new as HTML
+  Parameters: {"game_id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:3
+  Rendering frames/new.html.erb within layouts/application
+  [1m[36mFrame Load (0.2ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/views/frames/new.html.erb:3
+  Rendered frames/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 26ms (Views: 21.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/games/2/frames" for ::1 at 2019-07-29 14:16:12 -0700
+Processing by FramesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y4EX/B+OY4RKHrqizjsElriQ+mynoDrBxpcMmkdrdK2t+EsIpSjVVbAwWEKInP1ACY9fLhncUPerIwdD4vDVUg==", "frame"=>{"ball_one"=>"5", "ball_two"=>"2", "frame_number"=>"0"}, "commit"=>"Bowl!", "game_id"=>"2"}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/models/frame.rb:7
+  [1m[36mFrame Create (0.5ms)[0m  [1m[32mINSERT INTO "frames" ("ball_one", "ball_two", "frame_number", "frame_score", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["ball_one", 5], ["ball_two", 2], ["frame_number", 3], ["frame_score", 14], ["game_id", 2], ["created_at", "2019-07-29 21:16:12.410570"], ["updated_at", "2019-07-29 21:16:12.410570"]]
+  ↳ app/controllers/frames_controller.rb:9
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/frames_controller.rb:9
+Redirected to http://localhost:3000/games/2/frames/13
+Completed 302 Found in 13ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/games/2/frames/13" for ::1 at 2019-07-29 14:16:12 -0700
+Processing by FramesController#show as HTML
+  Parameters: {"game_id"=>"2", "id"=>"13"}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:15
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT  "frames".* FROM "frames" WHERE "frames"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:16
+  Rendering frames/show.html.erb within layouts/application
+  Rendered frames/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 26ms (Views: 23.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/games/2/frames/new" for ::1 at 2019-07-29 14:16:14 -0700
+Processing by FramesController#new as HTML
+  Parameters: {"game_id"=>"2"}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT  "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/frames_controller.rb:3
+  Rendering frames/new.html.erb within layouts/application
+  [1m[36mFrame Load (0.1ms)[0m  [1m[34mSELECT "frames".* FROM "frames" WHERE "frames"."game_id" = ?[0m  [["game_id", 2]]
+  ↳ app/views/frames/new.html.erb:3
+  Rendered frames/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 22ms (Views: 18.4ms | ActiveRecord: 0.3ms)
+
+
