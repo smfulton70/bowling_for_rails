@@ -2,7 +2,9 @@
 
 Ball 1: <%= @frame.ball_one %><br />
 Ball 2: <%= @frame.ball_two %><br />
+<% if @frame.ball_three %>
 Ball 3: <%= @frame.ball_three %><br />
+<% end %>
 Frame Number: <%= @frame.frame_number %><br />
 Frame Score: <%= @frame.frame_score %><br />
 Strike: <%= @frame.strike %><br />
@@ -10,6 +12,8 @@ Spare: <%= @frame.spare %><br /><br />
 
 <% if @frame.frame_number == 10 %>
   <%= link_to "See game results", game_path(params[:game_id]) %>
+
+  <p>Want to <%= link_to "bowl another game?", new_game_path %></p>
 <% else %>
   <%= link_to "Bowl again", new_game_frame_path %>
 <% end %>

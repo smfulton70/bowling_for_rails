@@ -3,15 +3,18 @@ class Frame < ApplicationRecord
   validates :ball_one, :ball_two, presence: true
 
   before_create do
-    if self.game
-      if self.game.frames.length == 2
+    if self.game.frames
+      if self.game.frames.length >= 1
         @previous_frame = self.game.frames[-1]
-        p "This is last frame: #{@previous_frame}"
-      elsif self.game.frames.length > 2
-        @previous_previous_frame = self.game.frames[-2]
-        @previous_frame = self.game.frames[-1]
-        p "This is two frames ago: #{@previous_previous_frame}"
-        p "This is last frame: #{@previous_frame}"
+        if self.game.frames.length > 1
+          @previous_previous_frame = self.game.frames[-2]
+        end
+      end
+      if @previous_frame.strike == true
+        if @previous_previous_frame.strike == true
+          @previous_previous_frame.update({frame_score: frame_score + self.ball_one})
+        end
+        @previous_frame.update({frame_score: frame_score + get_frame_pin_total})
       end
     end
     self.strike = true if ball_one == 10

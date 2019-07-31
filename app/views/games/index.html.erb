@@ -1,6 +1,10 @@
+<h1>Games Index Page</h1>
+
+<table>
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.name %></td>
-    <td><%= game.final_score %></td>
+    <td>Game Name: <%= game.name %></td>
+    <td>Final Score: <%= game.frames[-1].frame_score %></td>
   </tr>
 <% end %>
+</table>

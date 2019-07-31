@@ -18,6 +18,11 @@ class GamesController < ApplicationController
     end
   end
 
+  def update
+    @game = Game.find(params[:id])
+    @game.save
+  end
+
   def show
     @game = Game.find(params[:id])
   end
