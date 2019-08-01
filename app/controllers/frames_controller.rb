@@ -8,9 +8,6 @@ def create
   @game = Game.find(params[:game_id])
   @frame = @game.frames.create(frame_params)
   @frame.set_frame_number
-  p "***************************************************"
-  p "First saved to database, Frame 1 score is now #{@frame.frame_score}"
-  p "***************************************************"
   redirect_to game_frame_path(@game, @frame)
 end
 
