@@ -4,23 +4,31 @@ class Frame < ApplicationRecord
 
   before_create do
     if self.game.frames
-      if self.game.frames.length >= 1
-        @previous_frame = self.game.frames[-1]
-        if self.game.frames.length > 1
-          @previous_previous_frame = self.game.frames[-2]
+      if self.game.frames.length >= 1 # If at least one frame has been saved to database...
+        @one_frame_ago = self.game.frames[-1] # the last frame saved to database is assigned to @one_frame_ago
+        if self.game.frames.length >= 2
+          @two_frames_ago = self.game.frames[-2]
         end
       end
-      if @previous_frame.strike == true
-        if @previous_previous_frame.strike == true
-          @previous_previous_frame.update({frame_score: frame_score + self.ball_one})
+      if (@two_frames_ago && @two_frames_ago.strike == true) && (@one_frame_ago.strike == true)
+        @two_frames_ago.update({frame_score: @two_frames_ago.frame_score + 20})
+        if self.frame_number == 10
+          @two_games_ago.update({frame_score: @two_frames_ago.frame_score + 20})
+          @one_frame_ago.update({frame_score: @two_frames_ago.frame_score + 30})
+        else
+          @one_frame_ago.update({frame_score: @two_frames_ago.frame_score + 10})
         end
-        @previous_frame.update({frame_score: frame_score + get_frame_pin_total})
       end
+      if @one_frame_ago && @one_frame_ago.spare == true
+         @one_frame_ago.update({frame_score: @one_frame_ago.frame_score + self.ball_one})
+      end
+    else
+      self.frame_score = get_frame_pin_total
     end
     self.strike = true if ball_one == 10
     self.spare = true if ball_one != 10 && get_frame_pin_total == 10
     self.frame_number = self.game.frames.length + 1
-    self.frame_score = (@previous_frame ? @previous_frame.frame_score : 0) + get_frame_pin_total
+    self.frame_score = (@one_frame_ago ? @one_frame_ago.frame_score : 0) + get_frame_pin_total
   end
 
   def bowl
