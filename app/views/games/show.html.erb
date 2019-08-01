@@ -1,12 +1,24 @@
 <h1>This is the game show page.</h1>
 
 <% if @game.frames.length == 10 %>
-  Thanks for playing. Your score is <%= @game.final_score %>.
+
+  Thanks for playing. Your score is <%= @game.frames[-1].frame_score %>.<br /><br />
+
+  <% @game.frames.each do |frame| %>
+    Frame number: <%= frame.frame_number %><br />
+    Ball One: <%= frame.ball_one %><br />
+    Ball Two: <%= frame.ball_two %><br />
+
+    Frame Score: <%= frame.frame_score %><br />
+    Strike?: <%= frame.strike %><br />
+    Spare?: <%= frame.spare %><br /><br />
+  <% end %>
+
+  <p>Want to <%= link_to "bowl another game?", new_game_path %></p>
 <% else %>
 
 
 Welcome to your game, <%= @game.name %>
-
 
 Click <%= link_to "here", new_game_frame_path(@game) %> to bowl.
 
