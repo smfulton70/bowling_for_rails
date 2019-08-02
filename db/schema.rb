@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_07_24_001845) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "frames", force: :cascade do |t|
     t.integer "ball_one", default: 0
     t.integer "ball_two", default: 0
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_001845) do
     t.integer "frame_score", default: 0
     t.boolean "spare", default: false
     t.boolean "strike", default: false
-    t.integer "game_id"
+    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_frames_on_game_id"
@@ -29,8 +32,10 @@ ActiveRecord::Schema.define(version: 2019_07_24_001845) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.integer "final_score"
+    t.integer "bonus", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "frames", "games"
 end

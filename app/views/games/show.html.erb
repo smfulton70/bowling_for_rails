@@ -4,6 +4,8 @@
 
   Thanks for playing. Your score is <%= @game.frames[-1].frame_score %>.<br /><br />
 
+<%= @frame_change_logs %>
+
   <% @game.frames.each do |frame| %>
     Frame number: <%= frame.frame_number %><br />
     Ball One: <%= frame.ball_one %><br />

@@ -1,10 +1,6 @@
 class Game < ApplicationRecord
   has_many :frames
 
-  before_update do
-
-  end
-
   def calculate_frame_score
     #most recently completed frame
     current_frame = self.frames.last
