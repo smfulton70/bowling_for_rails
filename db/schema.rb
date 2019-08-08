@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_001845) do
     t.integer "ball_one", default: 0
     t.integer "ball_two", default: 0
     t.integer "ball_three"
+    t.integer "bonus", default: 0
     t.integer "frame_number", default: 0
     t.integer "frame_score", default: 0
     t.boolean "spare", default: false
@@ -32,7 +33,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_001845) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.integer "final_score"
-    t.integer "bonus", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
