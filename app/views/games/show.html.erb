@@ -6,7 +6,9 @@
 
 <%= @frame_change_logs %>
 
-  <% @game.frames.each do |frame| %>
+  <% @game.calculate_frame_scores %>
+
+  <% @game.frames.order(:frame_number).each do |frame| %>
     Frame number: <%= frame.frame_number %><br />
     Ball One: <%= frame.ball_one %><br />
     Ball Two: <%= frame.ball_two %><br />

@@ -1,35 +1,12 @@
 class Frame < ApplicationRecord
   belongs_to :game
   validates :ball_one, :ball_two, presence: true
-
+  
   before_create do
     @game = self.game
-    if @game.frames.length >= 1
-      @one_frame_ago = @game.frames[-1]
-      if @one_frame_ago.spare == true
-        @one_frame_ago.update({frame_score: @one_frame_ago.frame_score + self.ball_one})
-      end
-      if @game.frames.length >= 2
-        @two_frames_ago = @game.frames[-2]
-        if @two_frames_ago.strike == true
-          if @one_frame_ago.strike == true
-            @two_frames_ago.update({frame_score: @two_frames_ago.frame_score + 10})
-            if @one_frame_ago.frame_number == 9
-              @one_frame_ago.update({frame_score: @one_frame_ago.frame_score + 30})
-            else
-              @one_frame_ago.update({frame_score: @one_frame_ago.frame_score + 20})
-            end
-          else
-            @two_frames_ago.update({frame_score: @two_frames_ago.frame_score + @one_frame_ago.ball_one})
-          end
-        end
-      end
-    end
-
     self.strike = true if ball_one == 10
     self.spare = true if ball_one != 10 && get_frame_pin_total == 10
     self.frame_number = @game.frames.length + 1
-    self.frame_score = self.get_frame_pin_total + (@one_frame_ago ? @one_frame_ago.frame_score : 0)
   end
 
   def bowl
@@ -82,20 +59,4 @@ class Frame < ApplicationRecord
   def set_frame_number
     frame_number = self.game.frames.length
   end
-
-  # def is_strike?
-  #   if ball_one == 10
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
-  #
-  # def is_spare?
-  #   if ball_one != 10 && (ball_one + ball_two + ball_three) == 10
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
 end
