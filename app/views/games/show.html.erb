@@ -4,9 +4,7 @@
 
   Thanks for playing. Your score is <%= @game.frames[-1].frame_score %>.<br /><br />
 
-<%= @frame_change_logs %>
-
-  <% @game.calculate_frame_scores %>
+<% @game.calculate_frame_scores %>
 
   <% @game.frames.order(:frame_number).each do |frame| %>
     Frame number: <%= frame.frame_number %><br />
@@ -17,6 +15,28 @@
     Strike?: <%= frame.strike %><br />
     Spare?: <%= frame.spare %><br /><br />
   <% end %>
+
+  <div class="gameContainer">
+    <% for i in 0..@game.frames.length-2 %>
+    <div class="frame">
+      <div class="framesquare">
+        <% if @game.frames[i].strike == true %>
+          X
+        <% elsif @game.frames[i].spare == true %>
+          /
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    <div class="frame">
+      <div class="framesquare" id="tenthframesquare1">
+        X
+      </div><!--
+      --><div class="framesquare" id="tenthframesquare2">
+        X
+      </div>
+    </div>
+  </div>
 
   <p>Want to <%= link_to "bowl another game?", new_game_path %></p>
 <% else %>

@@ -3,7 +3,6 @@ class Game < ApplicationRecord
 
   def calculate_frame_scores
     @frames = self.frames
-    puts @frames
     for i in 0..9
       if i <= 8
         next_frame = @frames[i + 1]
@@ -20,7 +19,7 @@ class Game < ApplicationRecord
         @frames[i].update({frame_score: @frames[i].frame_score + next_frame.ball_one})
       end
       if @frames[i].strike == true && @frames[i].frame_number < 9
-        if next_frame.strike == true
+        if next_frame && next_frame.strike == true
           @frames[i].update({frame_score: @frames[i].frame_score + 10 + two_frames_future.ball_one})
         else
           @frames[i].update({frame_score: @frames[i].frame_score + next_frame.ball_one + next_frame.ball_two})

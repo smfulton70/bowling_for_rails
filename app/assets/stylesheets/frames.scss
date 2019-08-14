@@ -1,3 +1,43 @@
 // Place all the styles related to the Frames controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gameContainer {
+  font-size: 0
+}
+
+.frame {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  font-size: 12px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.frame:last-child {
+  border-right: 1px solid;
+}
+
+.framesquare {
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  display: inline-block;
+  width: 20px;
+	height: 20px;
+	position: relative;
+  left: 40px;
+  top: 0px;
+}
+
+#tenthframesquare1 {
+  left: 40px;
+  width: 10px;
+}
+
+#tenthframesquare2 {
+  width: 9px;
+}

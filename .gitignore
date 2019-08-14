@@ -68,3 +68,10 @@ yarn-debug.log*
 =======
 !/storage/.keep
 >>>>>>> b2fb6c270f85908e7d689f95f6c88fde3eb80477
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

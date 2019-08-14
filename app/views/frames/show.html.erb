@@ -1,14 +1,14 @@
 
 
-Ball 1: <%= @frame.ball_one %><br />
-Ball 2: <%= @frame.ball_two %><br />
+Frame number: <%= @frame.frame_number %><br />
+Ball One: <%= @frame.ball_one %><br />
+Ball Two: <%= @frame.ball_two %><br />
 <% if @frame.ball_three %>
 Ball 3: <%= @frame.ball_three %><br />
 <% end %>
-Frame Number: <%= @frame.frame_number %><br />
 Frame Score: <%= @frame.frame_score %><br />
-Strike: <%= @frame.strike %><br />
-Spare: <%= @frame.spare %><br /><br />
+Strike?: <%= @frame.strike %><br />
+Spare?: <%= @frame.spare %><br /><br />
 
 <% if @frame.frame_number == 10 %>
   <%= link_to "See game results", game_path(params[:game_id]) %>
